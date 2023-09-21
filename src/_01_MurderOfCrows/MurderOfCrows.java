@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MurderOfCrows {
-
     ArrayList<Crow> theMurder = new ArrayList<Crow>();
 
+    int crowsSize = theMurder.size();
     public static void main(String[] args) {
         MurderOfCrows murderOfCrows = new MurderOfCrows();
         murderOfCrows.initializeCrows();
@@ -18,10 +18,17 @@ public class MurderOfCrows {
         //    through the stomach of each Crow, then print the name of the
         //    guilty Crow.
     	for(Crow c: theMurder) {
+    		for(String stom: c.getStomachContents()) {
+    			if(stom.equals("diamond")) {
+    				System.out.println(c.getName());
+    				break;
+    			}
+    		}
+    		System.out.println(crowsSize);
     		
     	}
         // 2. How many innocent crows had to die before the diamond was found?
-
+    	System.out.println(crowsSize);
     }
 
     private void initializeCrows() {
@@ -69,4 +76,4 @@ class Crow {
     public ArrayList<String> getStomachContents() {
         return stomachContents;
     }
-}
+}	
