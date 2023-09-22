@@ -4,76 +4,84 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MurderOfCrows {
-    ArrayList<Crow> theMurder = new ArrayList<Crow>();
+	ArrayList<Crow> theMurder = new ArrayList<Crow>();
 
-    int crowsSize = theMurder.size();
-    public static void main(String[] args) {
-        MurderOfCrows murderOfCrows = new MurderOfCrows();
-        murderOfCrows.initializeCrows();
-        murderOfCrows.findTheDiamond();
-    }
 
-    private void findTheDiamond() {
-        // 1. One of the Crows has eaten the diamond. You need to search
-        //    through the stomach of each Crow, then print the name of the
-        //    guilty Crow.
-    	for(Crow c: theMurder) {
-    		for(String stom: c.getStomachContents()) {
-    			if(stom.equals("diamond")) {
-    				System.out.println(c.getName());
-    				break;
-    			}
-    		}
-    		System.out.println(crowsSize);
-    		
-    	}
-        // 2. How many innocent crows had to die before the diamond was found?
-    	System.out.println(crowsSize);
-    }
+	public static void main(String[] args) {
+		MurderOfCrows murderOfCrows = new MurderOfCrows();
+		murderOfCrows.initializeCrows();
+		murderOfCrows.findTheDiamond();
+	}
 
-    private void initializeCrows() {
-        theMurder.add(new Crow("Rok"));
-        theMurder.add(new Crow("Merle"));
-        theMurder.add(new Crow("Poe"));
-        theMurder.add(new Crow("Grenwyn"));
-        theMurder.add(new Crow("Crawford"));
-        hideTheDiamond();
-    }
+	private void findTheDiamond() {
+		 int innocentCrowsChecked = 0;
+		// 1. One of the Crows has eaten the diamond. You need to search
+		// through the stomach of each Crow, then print the name of the
+		// guilty Crow.
+		for (Crow c : theMurder) {
+			for (String stom : c.getStomachContents()) {
+				if (stom.equals("diamond")) {
+					System.out.println(c.getName() + " is guilty!");
+					 System.out.println("Innocent crows died before finding the guilty crow: " + innocentCrowsChecked);
+					return;
+				}
+			}
+			innocentCrowsChecked++; 
+		}
+		// 2. How many innocent crows had to die before the diamond was found? STILL
+		// FIGURING OUT
+		System.out.println("The guilty crow is not among these crows.");
+		System.out.println("Innocent crows checked: " + innocentCrowsChecked);
+	}
 
-    private void hideTheDiamond() {
-        int randomness = new Random().nextInt(theMurder.size());
-        theMurder.get(randomness).getStomachContents().add("diamond");
-    }
+	private void initializeCrows() {
+		theMurder.add(new Crow("Rok"));
+		theMurder.add(new Crow("Merle"));
+		theMurder.add(new Crow("Poe"));
+		theMurder.add(new Crow("Grenwyn"));
+		theMurder.add(new Crow("Crawford"));
+		hideTheDiamond();
+	}
+
+	private void hideTheDiamond() {
+		int randomness = new Random().nextInt(theMurder.size());
+		theMurder.get(randomness).getStomachContents().add("diamond");
+	}
 }
 
 class Crow {
-    private String name;
-    private ArrayList<String> stomachContents = new ArrayList<String>();
+	private String name;
+	private ArrayList<String> stomachContents = new ArrayList<String>();
 
-    public Crow(String name) {
-        this.name = name;
-        fillCrowsStomach();
-    }
+	public Crow(String name) {
+		this.name = name;
+		fillCrowsStomach();
+	}
 
-    private void fillCrowsStomach() {
-        for (int i = 0; i < 10; i++)
-            this.stomachContents.add(getRandomCrowFood());
-    }
+	private void fillCrowsStomach() {
+		for (int i = 0; i < 10; i++)
+			this.stomachContents.add(getRandomCrowFood());
+	}
 
-    private String getRandomCrowFood() {
-        int randomness = new Random().nextInt(4);
-        if (randomness == 0) return "carrion";
-        else if (randomness == 1)return "snail";
-        else if (randomness == 2)return "acorn";
-        else if (randomness == 3)return "spider";
-        else return "grub";
-    }
+	private String getRandomCrowFood() {
+		int randomness = new Random().nextInt(4);
+		if (randomness == 0)
+			return "carrion";
+		else if (randomness == 1)
+			return "snail";
+		else if (randomness == 2)
+			return "acorn";
+		else if (randomness == 3)
+			return "spider";
+		else
+			return "grub";
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public ArrayList<String> getStomachContents() {
-        return stomachContents;
-    }
-}	
+	public ArrayList<String> getStomachContents() {
+		return stomachContents;
+	}
+}
