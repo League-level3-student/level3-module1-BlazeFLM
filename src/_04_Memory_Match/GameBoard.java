@@ -76,7 +76,7 @@ public class GameBoard extends JFrame implements ActionListener {
 	// 9. Fill in the drawCards method to draw all the cards in the ArrayList.
 	// Run your code and verify 2 cards are displayed and the game works.
 	public void drawCards() {
-		// left off here
+		
 	}
 
 	// 10.
