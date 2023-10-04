@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +20,7 @@ public class GameBoard extends JFrame implements ActionListener {
 	static Card secondSelectedCard = null;
 
 	// 1. Initialize TOTAL_CARDS to 2;
-	static int TOTAL_CARDS = 2;
+	static int TOTAL_CARDS = 52;
 
 	ArrayList<Card> cards;
 
@@ -32,6 +33,8 @@ public class GameBoard extends JFrame implements ActionListener {
 
 	int seconds;
 
+	Random ran = new Random();
+	
 	public void setup() {
 		gameClock = new Timer(1000, this);
 		updateTimer = new Timer(750, this);
@@ -40,7 +43,7 @@ public class GameBoard extends JFrame implements ActionListener {
 		if (TOTAL_CARDS % 2 != 0) {
 			System.out.println("ERROR: Odd number of total cards, " + TOTAL_CARDS);
 			System.exit(1);
-		}
+		} 
 
 		// 2. Initialize the ArrayList of Cards declared above
 		cards = new ArrayList<Card>();
@@ -49,7 +52,8 @@ public class GameBoard extends JFrame implements ActionListener {
 		// Also, add action listeners to each Card object and then add each
 		// of the Card objects to the ArrayList of Cards.
 		for (int i = 0; i < TOTAL_CARDS; i++) {
-			Card card = new Card(1);
+			Card card = new Card(i);
+			card.setFaceUpIcon(Card.cardImagesPath + (i + 1) + ".png");
 			card.addActionListener(this);
 			cards.add(card);
 		}
@@ -76,7 +80,9 @@ public class GameBoard extends JFrame implements ActionListener {
 	// 9. Fill in the drawCards method to draw all the cards in the ArrayList.
 	// Run your code and verify 2 cards are displayed and the game works.
 	public void drawCards() {
-		
+		for(Card c: cards) {
+			c.draw();
+		}
 	}
 
 	// 10.
@@ -86,13 +92,13 @@ public class GameBoard extends JFrame implements ActionListener {
 	//
 	// Go back and modify the code to have a total of 52 cards and 4 copies
 	// of each card, meaning x4 2s, x4 3s, x4 Jacks, ... one of each suit.
-	// You can use Jacks=11, Queens=12, Kings=12, Aces=13
+	// You can use Jacks=11, Queens=12, Kings=13, Aces=14
 	//
 	// EXTRA: You can use real card faces images instead of numbers by using
 	// the images in the CardImages folder and the setFaceUpIcon() method.
 	// Example:
 	// card.setFaceUpIcon(Card.cardImagesPath + (i+1) + ".png");
-
+	
 	public void setupGui(ArrayList<Card> cards) {
 		setTitle("League Memory Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

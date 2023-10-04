@@ -57,15 +57,17 @@ public class RetroSun extends PApplet {
 		// the pixels[] array
 		// https://processing.org/reference/loadPixels_.html
 		loadPixels();
-		
 
-		// We want to change the color of our sun so use an if statement
-		// to check if the pixel is the color of the yellow circle.
+		for (int i = 0; i < pixels.length; i++) {
+			// We want to change the color of our sun so use an if statement
+			// to check if the pixel is the color of the yellow circle.
+			if (pixels[i] == sunColors[0]) {
+				// If pixel[i] is the same color as the color of our circle (sunColors[0]),
+				// we need to map the pixel to a color in our sunColors[] array
+				// (see 2nd gradient image in RetroSun.html)
 
-		// If pixel[i] is the same color as the color of our circle (sunColors[0]),
-		// we need to map the pixel to a color in our sunColors[] array
-		// (see 2nd gradient image in RetroSun.html)
-
+			}
+		}
 		// The top of the sun is yellow (sunColors[0]) and the bottom
 		// of the sun is red (sunColors[sunColors.length - 1]
 
