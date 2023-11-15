@@ -28,7 +28,20 @@ public class MeetingScheduler {
         HashMap<String, ArrayList<Integer>> person1Schedule = person1.getSchedule();
         HashMap<String, ArrayList<Integer>> person2Schedule = person2.getSchedule();
         
+        Schedule time = new Schedule();
         
-        return null;
+        for(String day : person1Schedule.keySet()) {
+        	ArrayList<Integer> time1 = person1Schedule.get(day);
+        	ArrayList<Integer> time2 = person2Schedule.get(day);
+        	for(Integer i : time1) {
+        		for(Integer j : time2) {
+        			if(i == j) {
+        				time.addAvailability(day, i);
+        			}
+        		}
+        	}
+        	
+        }
+        return time;
     }
 }
